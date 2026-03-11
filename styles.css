@@ -1210,15 +1210,25 @@ p + p { margin-top: 14px; }
   padding: 52px;
   position: relative;
   overflow: hidden;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   gap: 52px;
-  align-items: start;
+  align-items: flex-start;
 }
 
-.pm-contact-header { grid-column: 1; }
-.pm-contact-info   { grid-column: 2; }
-.pm-contact-cta    { grid-column: 1; margin-top: -16px; }
+.pm-contact-left {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  flex: 1;
+  max-width: 480px;
+}
+
+.pm-contact-right {
+  flex: 1;
+  max-width: 420px;
+}
 
 .pm-contact-sub {
   font-size: 14px;
@@ -1365,12 +1375,9 @@ p + p { margin-top: 14px; }
   }
 
   .pm-contact-wrap {
-    grid-template-columns: 1fr;
-    gap: 40px;
+    flex-direction: column;
     padding: 40px;
-  }
-  .pm-contact-cta {
-    margin-top: 0;
+    gap: 40px;
   }
 }
 
@@ -1429,6 +1436,7 @@ p + p { margin-top: 14px; }
   /* Contact tight margins */
   .pm-contact-wrap {
     padding: 24px;
+    gap: 32px;
   }
   .pm-contact-deco {
     display: none; /* Hide large deco shapes on purely mobile */
