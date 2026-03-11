@@ -1337,6 +1337,23 @@ p + p { margin-top: 14px; }
 @media (max-width: 900px) {
   .pm-section { padding: 80px 0; }
   
+  /* Header wrapping to prevent forcing page width */
+  .header-inner {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+  }
+  .nav {
+    width: 100%;
+    justify-content: center;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    /* Hide scrollbar for a clean swipe list */
+    -ms-overflow-style: none;  
+    scrollbar-width: none;  
+  }
+  .nav::-webkit-scrollbar { display: none; }
+  
   .pm-exp-grid {
     grid-template-columns: 1fr;
   }
@@ -1357,10 +1374,18 @@ p + p { margin-top: 14px; }
   }
 }
 
-/* Mobile Devices (max-width: 650px) */
-@media (max-width: 650px) {
+/* Mobile Devices (max-width: 700px) */
+@media (max-width: 700px) {
   .pm-section { padding: 60px 0; }
   
+  /* Ensure header elements wrap safely */
+  .header-inner {
+    justify-content: space-between;
+  }
+  .nav {
+    justify-content: flex-start;
+  }
+
   .hero-clean-meta {
     flex-direction: column;
     align-items: flex-start;
@@ -1377,6 +1402,7 @@ p + p { margin-top: 14px; }
     gap: 20px;
   }
   
+  /* All data cards become 1 column */
   .pm-skills-grid,
   .pm-interests-grid,
   .pm-projects-grid {
@@ -1386,9 +1412,26 @@ p + p { margin-top: 14px; }
   .pm-lang-cards {
     flex-direction: column;
   }
+
+  /* Simplify About split layout on mobile */
+  .pm-about-split {
+    gap: 32px;
+  }
+  .pm-about-visual {
+    min-height: 280px;
+    padding: 24px;
+  }
+  .pa-big-text {
+    font-size: 110px;
+    top: 10px;
+  }
   
+  /* Contact tight margins */
   .pm-contact-wrap {
     padding: 24px;
+  }
+  .pm-contact-deco {
+    display: none; /* Hide large deco shapes on purely mobile */
   }
   
   .pm-footer-inner {
