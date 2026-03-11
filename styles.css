@@ -1112,23 +1112,30 @@ p + p { margin-top: 14px; }
 .pm-interest-item:hover::after { opacity: 1; }
 
 .pm-interest-index {
-  display: block;
   font-family: 'Playfair Display', serif;
-  font-size: 32px;
-  font-weight: 800;
-  color: var(--border-soft);
-  line-height: 1;
-  margin-bottom: 14px;
+  font-size: 110px;
+  font-weight: 900;
+  color: rgba(255,255,255,0.06);
+  line-height: 0.75;
+  position: absolute;
+  top: 15px;
+  left: 0px;
+  pointer-events: none;
+  z-index: 0;
   letter-spacing: -0.02em;
 }
 
 .pm-interest-item h3 {
+  position: relative;
+  z-index: 2;
   font-size: 14px;
   font-weight: 600;
   margin-bottom: 8px;
   color: var(--text);
 }
 .pm-interest-item p {
+  position: relative;
+  z-index: 2;
   font-size: 13px;
   color: var(--text-muted);
   line-height: 1.65;
