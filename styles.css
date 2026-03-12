@@ -1357,10 +1357,13 @@ p + p { margin-top: 14px; }
   /* Header wrapping to prevent forcing page width */
   .header-inner {
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-between;
     gap: 16px;
   }
+  .logo { order: 1; margin-right: auto; }
+  .header-actions { order: 2; margin-left: auto; }
   .nav {
+    order: 3;
     width: 100%;
     justify-content: center;
     overflow-x: auto;
@@ -1370,6 +1373,16 @@ p + p { margin-top: 14px; }
     scrollbar-width: none;  
   }
   .nav::-webkit-scrollbar { display: none; }
+  
+  /* Improve tap targets on mobile */
+  .theme-toggle {
+    width: 44px;
+    height: 44px;
+  }
+  .nav-cta {
+    padding: 10px 20px;
+    font-size: 13px;
+  }
   
   .pm-exp-grid {
     grid-template-columns: 1fr;
