@@ -1012,11 +1012,11 @@ p + p { margin-top: 14px; }
   transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
 }
 .pm-lang-card:hover {
-  border-color: rgba(249,115,22,0.35);
-  transform: translateY(-4px);
-  box-shadow: 0 0 0 1px rgba(249,115,22,0.10),
-              0 8px 30px rgba(249,115,22,0.12),
-              0 0 60px rgba(249,115,22,0.06);
+  border-color: rgba(249,115,22,0.40);
+  transform: translateY(-2px);
+  box-shadow: 0 0 0 1px rgba(249,115,22,0.15),
+              0 12px 40px rgba(0,0,0,0.4),
+              inset 0 0 40px rgba(249,115,22,0.08);
 }
 
 /* SVG ring progress wrapper */
