@@ -88,6 +88,44 @@ if ("IntersectionObserver" in window && revealSections.length) {
   revealSections.forEach((section) => section.classList.add("in-view"));
 }
 
+// Mobile Menu Logic
+const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+const navCloseBtn = document.getElementById("nav-close-btn");
+const mobileNav = document.getElementById("mobile-nav");
+const menuOverlay = document.getElementById("menu-overlay");
+const navLinks = mobileNav ? mobileNav.querySelectorAll("a") : [];
+
+const openMenu = () => {
+  if (mobileNav && menuOverlay) {
+    mobileNav.classList.add("open");
+    menuOverlay.classList.add("open");
+    document.body.style.overflow = "hidden"; // Prevent scrolling when menu is active
+  }
+};
+
+const closeMenu = () => {
+  if (mobileNav && menuOverlay) {
+    mobileNav.classList.remove("open");
+    menuOverlay.classList.remove("open");
+    document.body.style.overflow = ""; // Restore scrolling
+  }
+};
+
+if (mobileMenuBtn) {
+  mobileMenuBtn.addEventListener("click", openMenu);
+}
+if (navCloseBtn) {
+  navCloseBtn.addEventListener("click", closeMenu);
+}
+if (menuOverlay) {
+  menuOverlay.addEventListener("click", closeMenu);
+}
+
+// Close mobile menu when clicking a link
+navLinks.forEach((link) => {
+  link.addEventListener("click", closeMenu);
+});
+
 // SVG language ring progress animation
 const langCards = document.querySelectorAll('.pm-lang-card[data-lang-level]');
 const CIRCUMFERENCE = 2 * Math.PI * 35; // r=35 → ~219.9

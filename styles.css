@@ -1349,6 +1349,20 @@ p + p { margin-top: 14px; }
 /* ═══════════════════════════════════════════════
    RESPONSIVENESS (MEDIA QUERIES)
 ═══════════════════════════════════════════════ */
+.mobile-menu-btn {
+  display: none;
+  background: transparent;
+  border: none;
+  color: var(--text);
+  cursor: pointer;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+}
+[data-theme="light"] .mobile-menu-btn {
+  color: var(--text);
+}
 
 /* Tablets and small laptops (max-width: 900px) */
 @media (max-width: 900px) {
@@ -1362,17 +1376,74 @@ p + p { margin-top: 14px; }
   }
   .logo { order: 1; margin-right: auto; }
   .header-actions { order: 2; margin-left: auto; }
+  .desktop-only { display: none; }
+  .mobile-menu-btn { display: flex; }
+  
   .nav {
-    order: 3;
-    width: 100%;
-    justify-content: center;
-    overflow-x: auto;
-    padding-bottom: 4px;
-    /* Hide scrollbar for a clean swipe list */
-    -ms-overflow-style: none;  
-    scrollbar-width: none;  
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 260px;
+    height: 100vh;
+    background: var(--bg-card);
+    border-left: 1px solid var(--border-soft);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 80px 24px 40px;
+    gap: 24px;
+    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: -10px 0 40px rgba(0,0,0,0.5);
+    z-index: 1000;
   }
-  .nav::-webkit-scrollbar { display: none; }
+  .nav.open {
+    right: 0;
+  }
+  .nav a {
+    font-size: 16px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border-soft);
+    display: block;
+    width: 100%;
+  }
+
+  /* Close button inside mobile menu */
+  .nav-close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    color: var(--text);
+    cursor: pointer;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Background overlay when menu is open */
+  .menu-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(4px);
+    z-index: 999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+  }
+  .menu-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  
+  /* Fix spacing issues */
+  .hero-clean {
+    min-height: auto;
+    padding-top: 60px;
+  }
   
   /* Improve tap targets on mobile */
   .theme-toggle {
@@ -1403,20 +1474,17 @@ p + p { margin-top: 14px; }
 
 /* Mobile Devices (max-width: 700px) */
 @media (max-width: 700px) {
-  .pm-section { padding: 60px 0; }
+  .pm-section { padding: 40px 0; }
   
-  /* Ensure header elements wrap safely */
-  .header-inner {
-    justify-content: space-between;
-  }
-  .nav {
-    justify-content: flex-start;
-  }
-
   .hero-clean-meta {
+    padding-top: 40px;
     flex-direction: column;
     align-items: flex-start;
     gap: 12px;
+  }
+
+  .hero-clean-title-wrap {
+    padding-top: 20px;
   }
 
   .hero-clean-bottom {
