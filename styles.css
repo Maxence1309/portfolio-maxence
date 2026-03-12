@@ -1349,7 +1349,8 @@ p + p { margin-top: 14px; }
 /* ═══════════════════════════════════════════════
    RESPONSIVENESS (MEDIA QUERIES)
 ═══════════════════════════════════════════════ */
-.mobile-menu-btn {
+.mobile-menu-btn,
+.nav-close-btn {
   display: none;
   background: transparent;
   border: none;
@@ -1360,7 +1361,8 @@ p + p { margin-top: 14px; }
   align-items: center;
   justify-content: center;
 }
-[data-theme="light"] .mobile-menu-btn {
+[data-theme="light"] .mobile-menu-btn,
+[data-theme="light"] .nav-close-btn {
   color: var(--text);
 }
 
