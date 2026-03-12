@@ -35,6 +35,35 @@ if (cursor) {
   });
 }
 
+// Theme Toggle Logic
+const themeToggleBtn = document.getElementById("theme-toggle");
+
+if (themeToggleBtn) {
+  themeToggleBtn.addEventListener("click", () => {
+    // Add transition class for smooth theme changes
+    document.documentElement.classList.add("theme-transition");
+    
+    // Determine the current theme
+    const currentTheme = document.documentElement.getAttribute("data-theme") === "light" ? "light" : "dark";
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+    
+    // Set new theme
+    if (newTheme === "light") {
+      document.documentElement.setAttribute("data-theme", "light");
+    } else {
+      document.documentElement.removeAttribute("data-theme");
+    }
+    
+    // Save preference
+    localStorage.setItem("theme", newTheme);
+    
+    // Remove transition class after animation completes
+    window.setTimeout(() => {
+      document.documentElement.classList.remove("theme-transition");
+    }, 400);
+  });
+}
+
 // Scroll reveal for sections
 const revealSections = document.querySelectorAll(".section-reveal");
 
