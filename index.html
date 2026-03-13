@@ -7,7 +7,7 @@
   <meta name="description" content="Portfolio de Maxence Duhamel, développeur web et étudiant en Bachelor Informatique." />
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- Styles -->
   <link rel="stylesheet" href="styles.css" />
@@ -20,6 +20,12 @@
   </script>
 </head>
 <body>
+
+  <!-- Grain texture overlay -->
+  <div class="noise-overlay" aria-hidden="true"></div>
+
+  <!-- Page scroll progress -->
+  <div class="page-progress" id="page-progress" aria-hidden="true"></div>
 
   <!-- Custom cursor -->
   <div class="custom-cursor"></div>
@@ -122,6 +128,12 @@
         <a href="#projects" class="btn btn-primary">Voir mes projets</a>
         <a href="#contact" class="btn btn-ghost">Me contacter</a>
         <a href="CV-Maxence-Duhamel.pdf" class="btn btn-link" download>Télécharger mon CV</a>
+      </div>
+
+      <!-- Scroll indicator -->
+      <div class="hero-scroll-indicator" aria-hidden="true">
+        <span class="hero-scroll-label">Scroll</span>
+        <div class="hero-scroll-dot"></div>
       </div>
 
     </section>

@@ -1,4 +1,28 @@
-// Custom cursor
+// ─── Page scroll progress bar ──────────────────
+const progressBar = document.getElementById("page-progress");
+if (progressBar) {
+  window.addEventListener("scroll", () => {
+    const scrolled = window.scrollY;
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    progressBar.style.width = max > 0 ? (scrolled / max * 100) + "%" : "0%";
+  }, { passive: true });
+}
+
+// ─── Navbar scroll state ────────────────────────
+const siteHeader = document.querySelector(".site-header");
+if (siteHeader) {
+  const updateHeader = () => {
+    if (window.scrollY > 20) {
+      siteHeader.classList.add("scrolled");
+    } else {
+      siteHeader.classList.remove("scrolled");
+    }
+  };
+  window.addEventListener("scroll", updateHeader, { passive: true });
+  updateHeader();
+}
+
+// ─── Custom cursor ──────────────────────────────
 const cursor = document.querySelector(".custom-cursor");
 
 if (cursor) {
@@ -16,22 +40,22 @@ if (cursor) {
     cursor.style.opacity = "0";
   };
 
+  let cursorX = 0, cursorY = 0;
   window.addEventListener("mousemove", (e) => {
     showCursor();
-    cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+    cursorX = e.clientX;
+    cursorY = e.clientY;
+    cursor.style.left = cursorX + "px";
+    cursor.style.top = cursorY + "px";
   });
 
   window.addEventListener("mouseleave", hideCursor);
 
-  // Slight grow on interactive elements
-  const interactiveSelectors = "a, button, .btn, .nav-cta, .project-card, .skill-card";
+  // Grow on interactive elements
+  const interactiveSelectors = "a, button, .btn, .nav-cta, .pm-exp-card, .pm-skill-card, .pm-project-card, .pm-lang-card, .pm-interest-item";
   document.querySelectorAll(interactiveSelectors).forEach((el) => {
-    el.addEventListener("mouseenter", () => {
-      cursor.style.transform += " scale(1.35)";
-    });
-    el.addEventListener("mouseleave", () => {
-      cursor.style.transform = cursor.style.transform.replace(/scale\([^)]+\)/, "");
-    });
+    el.addEventListener("mouseenter", () => cursor.classList.add("cursor-grow"));
+    el.addEventListener("mouseleave", () => cursor.classList.remove("cursor-grow"));
   });
 }
 
