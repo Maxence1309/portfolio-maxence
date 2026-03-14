@@ -178,15 +178,11 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
   }
 
   /* ─────────────────────────────────────────────
-     LOADER D'INTRO
-     SessionStorage : ne joue qu'une fois par session
+     LOADER D'INTRO — joue à chaque chargement
   ───────────────────────────────────────────── */
   const loaderEl = document.getElementById('loader');
-  const loaderSeen = (() => {
-    try { return !!sessionStorage.getItem('loader-seen'); } catch(e) { return false; }
-  })();
 
-  if (loaderEl && !loaderSeen) {
+  if (loaderEl) {
     // Bloquer le scroll pendant le loader
     document.body.style.overflow = 'hidden';
 
@@ -195,7 +191,6 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
       delay: 0.15,
       onComplete: () => {
         document.body.style.overflow = '';
-        try { sessionStorage.setItem('loader-seen', '1'); } catch(e) {}
         startHero();
       }
     });
@@ -231,17 +226,8 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
     });
 
   } else {
-    // Loader déjà vu — on le masque et on lance le hero directement
-    if (loaderEl) loaderEl.style.display = 'none';
-    const curtain = document.getElementById('page-curtain');
-    if (curtain) {
-      gsap.to(curtain, {
-        opacity: 0, duration: 0.75, ease: 'power2.inOut',
-        onComplete: () => { curtain.style.display = 'none'; startHero(); }
-      });
-    } else {
-      gsap.delayedCall(0.1, startHero);
-    }
+    // Pas de loader dans le DOM — lance le hero directement
+    gsap.delayedCall(0.1, startHero);
   }
 
   /* ─────────────────────────────────────────────
