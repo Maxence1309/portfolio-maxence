@@ -2110,3 +2110,118 @@ p + p { margin-top: 14px; }
 body, .site-header, .hero-clean, .pm-exp-card, .pm-skill-card, .pm-lang-card, .pm-interest-item, .pm-project-card, .pm-contact-wrap, .pm-tag, .pm-badge, .pm-circle-pill, .geo-circle, .geo-dot, .geo-pill, .btn {
   transition: background-color 0.4s ease, background 0.4s ease, border-color 0.4s ease, color 0.4s ease, box-shadow 0.4s ease, transform var(--transition);
 }
+
+/* ═══════════════════════════════════════════════
+   ANIMATED HALOS — blobs orbitaux type aurora
+═══════════════════════════════════════════════ */
+.halo {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  will-change: transform;
+}
+
+.halo-1 {
+  width: min(900px, 65vw); height: min(900px, 65vw);
+  background: radial-gradient(ellipse at center, rgba(220, 90, 10, 0.38) 0%, transparent 68%);
+  filter: blur(90px);
+  top: 10%; left: -18%;
+  animation: halo-a 24s ease-in-out infinite alternate;
+}
+.halo-2 {
+  width: min(800px, 60vw); height: min(800px, 60vw);
+  background: radial-gradient(ellipse at center, rgba(110, 30, 210, 0.52) 0%, transparent 68%);
+  filter: blur(100px);
+  bottom: 5%; right: -12%;
+  animation: halo-b 29s ease-in-out infinite alternate;
+  animation-delay: -7s;
+}
+.halo-3 {
+  width: min(640px, 50vw); height: min(640px, 50vw);
+  background: radial-gradient(ellipse at center, rgba(190, 20, 120, 0.44) 0%, transparent 68%);
+  filter: blur(80px);
+  top: 5%; right: 6%;
+  animation: halo-c 21s ease-in-out infinite alternate;
+  animation-delay: -12s;
+}
+.halo-4 {
+  width: min(560px, 44vw); height: min(560px, 44vw);
+  background: radial-gradient(ellipse at center, rgba(15, 110, 70, 0.30) 0%, transparent 68%);
+  filter: blur(75px);
+  bottom: 22%; left: 22%;
+  animation: halo-d 18s ease-in-out infinite alternate;
+  animation-delay: -4s;
+}
+.halo-5 {
+  width: min(500px, 40vw); height: min(500px, 40vw);
+  background: radial-gradient(ellipse at center, rgba(190, 140, 10, 0.28) 0%, transparent 68%);
+  filter: blur(70px);
+  bottom: -5%; left: 38%;
+  animation: halo-e 22s ease-in-out infinite alternate;
+  animation-delay: -16s;
+}
+
+@keyframes halo-a {
+  0%   { transform: translate(0%,   0%)   scale(1);    }
+  25%  { transform: translate(8%,  -10%)  scale(1.12); }
+  60%  { transform: translate(-5%,  8%)   scale(0.93); }
+  100% { transform: translate(12%,  -6%)  scale(1.08); }
+}
+@keyframes halo-b {
+  0%   { transform: translate(0%,   0%)   scale(1);    }
+  35%  { transform: translate(-7%,  9%)   scale(1.16); }
+  70%  { transform: translate(5%,  -7%)   scale(0.91); }
+  100% { transform: translate(-10%, 4%)   scale(1.06); }
+}
+@keyframes halo-c {
+  0%   { transform: translate(0%,   0%)   scale(1);    }
+  40%  { transform: translate(-8%,  12%)  scale(1.10); }
+  80%  { transform: translate(6%,  -8%)   scale(0.90); }
+  100% { transform: translate(-4%,  10%)  scale(1.05); }
+}
+@keyframes halo-d {
+  0%   { transform: translate(0%,   0%)   scale(1);    }
+  45%  { transform: translate(10%, -12%)  scale(1.08); }
+  100% { transform: translate(-6%,  8%)   scale(1.13); }
+}
+@keyframes halo-e {
+  0%   { transform: translate(0%,   0%)   scale(1);    }
+  50%  { transform: translate(-9%,  -7%)  scale(1.15); }
+  100% { transform: translate(7%,   9%)   scale(0.94); }
+}
+
+/* ═══════════════════════════════════════════════
+   PAGE CURTAIN — recouvre au chargement
+═══════════════════════════════════════════════ */
+#page-curtain {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  z-index: 9997;
+  pointer-events: none;
+}
+
+/* ═══════════════════════════════════════════════
+   GSAP READY — désactive la section-reveal CSS
+   (GSAP prend le relais via ScrollTrigger)
+═══════════════════════════════════════════════ */
+body.gsap-ready .section-reveal {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+/* ═══════════════════════════════════════════════
+   CURSOR — support classe hidden (mouseleave)
+═══════════════════════════════════════════════ */
+.custom-cursor.cursor-hidden { opacity: 0 !important; }
+
+/* ═══════════════════════════════════════════════
+   LIGHT MODE — halos plus prononcés
+═══════════════════════════════════════════════ */
+[data-theme="light"] .halo { opacity: 0.55; }
+[data-theme="light"] .halo-1 { opacity: 0.60; } /* orange — plus chaud */
+[data-theme="light"] .halo-2 { opacity: 0.50; } /* violet */
+[data-theme="light"] .halo-3 { opacity: 0.55; } /* magenta */
+[data-theme="light"] #page-curtain { background: var(--bg); }

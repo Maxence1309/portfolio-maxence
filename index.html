@@ -21,6 +21,16 @@
 </head>
 <body>
 
+  <!-- Animated ambient halos -->
+  <div class="halo halo-1" aria-hidden="true"></div>
+  <div class="halo halo-2" aria-hidden="true"></div>
+  <div class="halo halo-3" aria-hidden="true"></div>
+  <div class="halo halo-4" aria-hidden="true"></div>
+  <div class="halo halo-5" aria-hidden="true"></div>
+
+  <!-- Page curtain — fades out on load -->
+  <div id="page-curtain" aria-hidden="true"></div>
+
   <!-- Grain texture overlay -->
   <div class="noise-overlay" aria-hidden="true"></div>
 
@@ -74,7 +84,7 @@
       <div class="hero-clean-meta container">
         <div class="hc-badge-wrap">
           <span class="hc-circle"></span>
-          <span class="hc-pill">2025</span>
+          <span class="hc-pill">2026</span>
         </div>
         <span class="hc-site-label">maxenceduhamel.dev</span>
       </div>
@@ -82,8 +92,8 @@
       <!-- Giant title -->
       <div class="hero-clean-title-wrap container">
         <h1 class="hero-clean-title" aria-label="PORTFOLIO">
-          <span class="hct-word">PORT</span>
-          <span class="hct-word">FOLIO</span>
+          <span class="hct-word hct-word--port">PORT</span>
+          <span class="hct-word hct-word--folio">FOLIO</span>
         </h1>
 
         <!-- Pill overlays -->
@@ -649,6 +659,8 @@
   </footer>
 
   <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
