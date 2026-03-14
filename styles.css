@@ -2112,6 +2112,81 @@ body, .site-header, .hero-clean, .pm-exp-card, .pm-skill-card, .pm-lang-card, .p
 }
 
 /* ═══════════════════════════════════════════════
+   LOADER D'INTRO
+═══════════════════════════════════════════════ */
+#loader {
+  position: fixed;
+  inset: 0;
+  background: #0a0a0a;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loader-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.loader-logo {
+  position: relative;
+  width: 180px; height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loader-ring {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  overflow: visible;
+}
+
+/* r=82 → circumference ≈ 515.2 */
+.loader-ring-path {
+  fill: none;
+  stroke: rgba(240, 230, 211, 0.50);
+  stroke-width: 1;
+  stroke-linecap: round;
+  stroke-dasharray: 515;
+  stroke-dashoffset: 515;
+  transform-origin: 90px 90px;
+  transform: rotate(-90deg);
+}
+
+.loader-md {
+  font-family: var(--font-body);
+  font-size: 60px;
+  font-weight: 700;
+  color: #f0e6d3;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  position: relative;
+  z-index: 1;
+  opacity: 0;
+}
+
+.loader-word {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.loader-letter {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  color: #f0e6d3;
+  text-transform: uppercase;
+  letter-spacing: 0.30em;
+  opacity: 0;
+}
+
+/* ═══════════════════════════════════════════════
    ANIMATED HALOS — blobs orbitaux type aurora
 ═══════════════════════════════════════════════ */
 .halo {

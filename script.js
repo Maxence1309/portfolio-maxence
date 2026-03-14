@@ -124,25 +124,10 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
   document.body.classList.add('gsap-ready');
 
   /* ─────────────────────────────────────────────
-     PAGE CURTAIN — fondu d'entrée
+     HERO ENTRANCE TIMELINE — paused, déclenché
+     après le loader (ou immédiatement si déjà vu)
   ───────────────────────────────────────────── */
-  const curtain = document.getElementById('page-curtain');
-  if (curtain) {
-    gsap.to(curtain, {
-      opacity: 0,
-      duration: 0.85,
-      ease: 'power2.inOut',
-      onComplete: () => { curtain.style.display = 'none'; }
-    });
-  }
-
-  /* ─────────────────────────────────────────────
-     HERO ENTRANCE TIMELINE
-     Orchestration : méta → PORT (gauche) → FOLIO (droite)
-     → deco → bas → CTA → scroll indicator
-     PORT/FOLIO : back.out pour overshoot
-  ───────────────────────────────────────────── */
-  const heroTl = gsap.timeline({ defaults: { ease: 'power4.out' }, delay: 0.25 });
+  const heroTl = gsap.timeline({ paused: true, defaults: { ease: 'power4.out' } });
 
   // Meta row — slide depuis le haut
   heroTl.from('.hero-clean-meta', { y: -28, opacity: 0, duration: 0.65 }, 0.2);
@@ -181,6 +166,83 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
 
   // Scroll indicator
   heroTl.from('.hero-scroll-indicator', { opacity: 0, duration: 0.55 }, 1.35);
+
+  /* ─────────────────────────────────────────────
+     startHero() — déclenche le hero après le loader
+     ou directement si session déjà vue
+  ───────────────────────────────────────────── */
+  function startHero() {
+    const curtain = document.getElementById('page-curtain');
+    if (curtain) curtain.style.display = 'none';
+    heroTl.play();
+  }
+
+  /* ─────────────────────────────────────────────
+     LOADER D'INTRO
+     SessionStorage : ne joue qu'une fois par session
+  ───────────────────────────────────────────── */
+  const loaderEl = document.getElementById('loader');
+  const loaderSeen = (() => {
+    try { return !!sessionStorage.getItem('loader-seen'); } catch(e) { return false; }
+  })();
+
+  if (loaderEl && !loaderSeen) {
+    // Bloquer le scroll pendant le loader
+    document.body.style.overflow = 'hidden';
+
+    // Timeline du loader
+    const loadTl = gsap.timeline({
+      delay: 0.15,
+      onComplete: () => {
+        document.body.style.overflow = '';
+        try { sessionStorage.setItem('loader-seen', '1'); } catch(e) {}
+        startHero();
+      }
+    });
+
+    // 1 — MD : fade in + léger scale depuis 0.85
+    loadTl.fromTo('.loader-md',
+      { opacity: 0, scale: 0.85 },
+      { opacity: 1, scale: 1, duration: 0.55, ease: 'power3.out' },
+      0);
+
+    // 2 — Cercle : se dessine en 650ms (stroke-dashoffset 515 → 0)
+    loadTl.fromTo('.loader-ring-path',
+      { strokeDashoffset: 515 },
+      { strokeDashoffset: 0, duration: 0.65, ease: 'power2.inOut' },
+      0.20);
+
+    // 3 — Lettres PORTFOLIO en cascade (50ms entre chaque)
+    loadTl.fromTo('.loader-letter',
+      { opacity: 0, y: 10 },
+      { opacity: 1, y: 0, duration: 0.22, stagger: 0.05, ease: 'power2.out' },
+      0.75);
+
+    // 4 — Pause courte
+    loadTl.to({}, { duration: 0.32 });
+
+    // 5 — Sortie : fade + scale up
+    loadTl.to('#loader', {
+      opacity: 0,
+      scale: 1.06,
+      duration: 0.50,
+      ease: 'power2.inOut',
+      onComplete: () => { loaderEl.style.display = 'none'; }
+    });
+
+  } else {
+    // Loader déjà vu — on le masque et on lance le hero directement
+    if (loaderEl) loaderEl.style.display = 'none';
+    const curtain = document.getElementById('page-curtain');
+    if (curtain) {
+      gsap.to(curtain, {
+        opacity: 0, duration: 0.75, ease: 'power2.inOut',
+        onComplete: () => { curtain.style.display = 'none'; startHero(); }
+      });
+    } else {
+      gsap.delayedCall(0.1, startHero);
+    }
+  }
 
   /* ─────────────────────────────────────────────
      HERO PARALLAX au scroll
