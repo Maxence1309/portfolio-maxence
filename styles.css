@@ -1474,6 +1474,26 @@ p + p { margin-top: 14px; }
   margin: 0;
 }
 
+.pm-project-footer {
+  margin-top: auto;
+  padding-top: 20px;
+}
+
+.pm-project-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-1);
+  text-decoration: none;
+  transition: gap var(--transition), opacity var(--transition);
+}
+.pm-project-link:hover { gap: 12px; opacity: 0.8; }
+.pm-project-link svg { flex-shrink: 0; }
+
 /* ═══════════════════════════════════════════════
    SECTION CONTACT
 ═══════════════════════════════════════════════ */
